@@ -29,7 +29,7 @@ final readonly class Signer
 
     public static function validate(array $data, #[\SensitiveParameter] string $key): bool
     {
-        return hash_equals(self::hash($data, $key), $data['meta']['signature'] ?? '');
+        return isset($data['meta']['signature']) && hash_equals(self::hash($data, $key), $data['meta']['signature']);
     }
 
     /**
