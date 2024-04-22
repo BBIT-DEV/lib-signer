@@ -8,10 +8,6 @@ final readonly class Signer
 {
     private const string ALGORITHM = 'sha512';
 
-    private function __construct()
-    {
-    }
-
     public static function sign(array $data, #[\SensitiveParameter] string $key): array
     {
         $data['meta']['signature'] = self::hash($data, $key);
@@ -19,7 +15,7 @@ final readonly class Signer
         return $data;
     }
 
-    public static function hash(array $data, #[\SensitiveParameter] string $key): string
+    private static function hash(array $data, #[\SensitiveParameter] string $key): string
     {
         unset($data['meta']['signature']);
         self::rksort($data);
